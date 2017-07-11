@@ -217,3 +217,144 @@ int main()
 }
 */
 
+/*
+#include <iostream>
+
+int main()
+{
+	// currval is the number we're counting we'll read new values into val
+	int currVal = 0, val = 0;
+	// read first number and ensure that we have data to process
+	if (std::cin >> currVal) {
+		int cnt = 1; // store the count for the current value we're processing
+		while (std::cin >> val) { // read the remaining numbers
+			if (val == currVal) // if the values are the same
+				++cnt; // add 1 to cnt
+			else { // otherwise, print the count for the previous value
+				std::cout << currVal << " occurs " << cnt << " times" << std::endl;
+				currVal = val; // remember the new value
+				cnt = 1; // reset the counter
+			}
+		} // While loop ends here
+		// remeber to print the count for the last value in the file
+		std::cout << currVal << " occurs " << cnt << " times" << std::endl;
+	} // outermost if statement ends here
+	return 0;
+}
+*/
+
+
+// Exercise 1.17
+// The program will stay in the while loop until another number is entered.
+
+// Exercise 1.18
+
+/*
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item book;
+	// read ISBN, number of copies sold, and sales price
+	std::cin >> book;
+	// write ISBN, number of copies sold, total revenue, and average price
+	std::cout << book << std::endl;
+	return 0;
+}
+*/
+
+/*
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item item1, item2;
+	std::cin >> item1 >> item2; // read a pair of transactions
+	std::cout << item1 + item2 << std::endl; // print their sum
+	return 0;
+}
+*/
+
+// Exercise 1.20
+/*
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item item1, item2;
+	std::cin >> item1 >> item2; // read a pair of transactions
+	std::cout << item1 << '\n' << item2 << std::endl;
+	return 0;
+}
+*/
+
+// Exercise 1.21
+/*
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item item1, item2;
+	std::cin >> item1 >> item2; // read a pair of transactions
+	std::cout << item1 + item2 << std::endl; // print their sum
+	return 0;
+}
+*/
+
+/*
+
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item item1, item2;
+	std::cin >> item1 >> item2; 
+	// first check that item and item2 represent the same book
+	if (item1.isbn() == item2.isbn()) {
+		std::cout << item1 + item2 << std::endl;
+		return 0;
+	}
+	else {
+		std::cerr << "Data must refer to same ISBN" << std::endl;
+		return -1;
+	}
+
+}
+
+*/
+
+#include <iostream>
+#include "Sales_item.h"
+
+int main()
+{
+	Sales_item total; // variable to hold data for the next transaction
+	// read the first transaction and ensure that there are data to process
+	if (std::cin >> total) {
+		Sales_item trans; // variable to hold the running sum
+		// read and process the remaining transactions
+		while (std::cin >> trans) {
+			// if w're still processing the same book
+			if (total.isbn() == trans.isbn())
+				total += trans; // update the running total
+			else {
+				// print results for the previous book
+				std::cout << total << std::endl;
+				total = trans; // total no refers to the next book
+			}
+
+		}
+		std::cout << total << std::endl; // print the last transaction	
+	}
+	else {
+		// no input! warn the user
+		std::cerr << "No data??" << std::endl;
+		return -1;
+	}
+	return 0;
+}
